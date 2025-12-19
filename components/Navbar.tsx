@@ -13,6 +13,7 @@ export default function Navbar() {
     { name: "Serviços", href: "/servicos" },
     { name: "Funcionários", href: "/funcionarios" },
     { name: "Quem Somos", href: "/quem-somos" },
+    { name: "Gerar OACA", href: "/gerar-oab" },
   ];
 
   return (

@@ -1,33 +1,37 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import { Scale, Shield, Gavel, UserCircle, ArrowRight, CheckCircle, BookOpen, FileText, ScrollText, Heart, Eye, Users, Clock, Briefcase, Building, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import React, { useState, useRef, useEffect } from "react";
+
 
 export default function Home() {
   const teamMembers = [
     {
-      name: "Dra. Maria Silva",
+      name: "Bianca Saito",
+      idade: 19,
       role: "Desembargadora",
       icon: Gavel,
-      description: "Responsável pelas decisões judiciais e direcionamento estratégico",
       color: "blue",
-      initials: "MS"
+      initials: "BS"
     },
     {
-      name: "João Santos",
-      role: "Chefe de Segurança",
+      name: "A definir",
+      role: "Cargo principal",
       icon: Shield,
-      description: "Garante a segurança e proteção de dados do sistema",
+      description: "Em breve",
       color: "red",
-      initials: "JS"
+      initials: "?"
     },
     {
-      name: "Ana Costa",
-      role: "Secretária",
+      name: "A definir",
+      role: "Cargo principal",
       icon: UserCircle,
-      description: "Coordena a administração e organização do escritório",
+      description: "Em breve",
       color: "green",
-      initials: "AC"
+      initials: "?"
     }
   ];
 
@@ -250,20 +254,25 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Nossa Equipe
+          {/* Cabeçalho da seção */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
+              <Users className="w-4 h-4" />
+              Conheça Nosso Time
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+              Nossa <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Equipe</span>
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Profissionais experientes dedicados a oferecer o melhor serviço jurídico
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Profissionais experientes e dedicados, comprometidos em oferecer excelência e transparência em cada decisão
             </p>
           </div>
 
           <div className="space-y-8">
             {/* Desembargadora - Centralizada */}
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center mb-12">
               {(() => {
                 const member = teamMembers[0]; // Desembargadora
                 const Icon = member.icon;
@@ -274,49 +283,53 @@ export default function Home() {
                 };
 
                 return (
-                  <div className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 w-full max-w-sm">
-                    {/* Photo Frame - Formato Retrato */}
-                    <div className="relative h-96 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
-                      {/* Placeholder com iniciais - substituir por Image quando tiver fotos reais */}
-                      <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${colorClasses[member.color as keyof typeof colorClasses]} opacity-90`}>
-                        <div className="text-center">
-                          <div className="text-8xl font-bold text-white/30 mb-2">
-                            {member.initials}
-                          </div>
-                          <Icon className="w-16 h-16 text-white/50 mx-auto" />
+                  <div className="group relative bg-white dark:bg-gray-800 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 dark:border-gray-700 w-full max-w-md mx-auto hover:scale-[1.02] hover:border-blue-200 dark:hover:border-blue-800 overflow-hidden">
+                    {/* Brilho decorativo */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* Photo Frame - Imagem real ajustada */}
+                    <div className="relative h-96 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 overflow-hidden rounded-t-3xl">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                      <img
+                        src="/bianca-desembargadora.png"
+                        alt="Desembargadora Bianca Saito"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        style={{ objectPosition: 'center 20%' }}
+                      />
+                      
+                      {/* Badge de cargo melhorado */}
+                      <div className="absolute bottom-6 left-6 right-6 bg-white/98 dark:bg-gray-900/98 backdrop-blur-md rounded-xl px-5 py-3 shadow-2xl border border-gray-200/50 dark:border-gray-700/50">
+                        <div className="flex items-center justify-center gap-2">
+                          <Gavel className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                          <p className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+                            {member.role}
+                          </p>
                         </div>
-                      </div>
-                      
-                      {/* Moldura decorativa */}
-                      <div className="absolute inset-0 border-8 border-white/10 pointer-events-none" />
-                      
-                      {/* Badge de cargo */}
-                      <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-white text-center">
-                          {member.role}
-                        </p>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="px-6 py-6 text-center">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    <div className="px-8 py-7 text-center bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-800/50">
+                      <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {member.name}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {member.description}
-                      </p>
+                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                          {member.idade} anos
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Decorative Element */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${colorClasses[member.color as keyof typeof colorClasses]} transform scale-x-0 group-hover:scale-x-100 transition-transform`} />
+                    {/* Barra decorativa animada */}
+                    <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${colorClasses[member.color as keyof typeof colorClasses]} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`} />
                   </div>
                 );
               })()}
             </div>
 
             {/* Outros Funcionários - Grid 2 colunas */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {teamMembers.slice(1).map((member, index) => {
                 const Icon = member.icon;
                 const colorClasses = {
@@ -328,43 +341,48 @@ export default function Home() {
                 return (
                   <div
                     key={index}
-                    className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700"
+                    className="group relative bg-white dark:bg-gray-800 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:scale-[1.02] hover:border-gray-200 dark:hover:border-gray-600"
                   >
-                    {/* Photo Frame - Formato Retrato */}
-                    <div className="relative h-96 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
-                      {/* Placeholder com iniciais - substituir por Image quando tiver fotos reais */}
-                      <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${colorClasses[member.color as keyof typeof colorClasses]} opacity-90`}>
-                        <div className="text-center">
-                          <div className="text-8xl font-bold text-white/30 mb-2">
+                    {/* Brilho de hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-500/5 via-transparent to-gray-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* Photo Frame - Placeholder */}
+                    <div className="relative h-80 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
+                      {/* Placeholder com iniciais e ícone */}
+                      <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${colorClasses[member.color as keyof typeof colorClasses]} opacity-90 group-hover:opacity-100 transition-opacity`}>
+                        <div className="text-center group-hover:scale-110 transition-transform duration-500">
+                          <div className="text-9xl font-bold text-white/20 mb-4">
                             {member.initials}
                           </div>
-                          <Icon className="w-16 h-16 text-white/50 mx-auto" />
+                          <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto backdrop-blur-sm">
+                            <Icon className="w-12 h-12 text-white" />
+                          </div>
                         </div>
                       </div>
                       
                       {/* Moldura decorativa */}
-                      <div className="absolute inset-0 border-8 border-white/10 pointer-events-none" />
+                      <div className="absolute inset-0 border-8 border-white/10 group-hover:border-white/20 pointer-events-none transition-all" />
                       
                       {/* Badge de cargo */}
-                      <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-white text-center">
+                      <div className="absolute bottom-5 left-5 right-5 bg-white/98 dark:bg-gray-900/98 backdrop-blur-md rounded-xl px-4 py-3 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
+                        <p className="text-sm font-bold text-gray-900 dark:text-white text-center uppercase tracking-wide">
                           {member.role}
                         </p>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="px-6 py-6 text-center">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    <div className="px-6 py-6 text-center bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-800/50">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
                         {member.name}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed italic">
                         {member.description}
                       </p>
                     </div>
 
-                    {/* Decorative Element */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${colorClasses[member.color as keyof typeof colorClasses]} transform scale-x-0 group-hover:scale-x-100 transition-transform`} />
+                    {/* Barra decorativa */}
+                    <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${colorClasses[member.color as keyof typeof colorClasses]} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`} />
                   </div>
                 );
               })}
@@ -372,13 +390,14 @@ export default function Home() {
           </div>
 
           {/* View All Team Button */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link
               href="/funcionarios"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-all font-medium"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl transition-all font-semibold shadow-lg hover:shadow-xl text-lg"
             >
-              Ver Todos os Funcionários
-              <ArrowRight className="w-4 h-4" />
+              <Users className="w-5 h-5" />
+              Ver Toda a Equipe
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
