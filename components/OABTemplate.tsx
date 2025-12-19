@@ -255,6 +255,7 @@ export default function OABTemplate({
             </div>
           </div>
         </div>
+        </div>
 
         {/* Informações adicionais */}
         <div 

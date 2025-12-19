@@ -44,10 +44,10 @@ export const authOptions: NextAuthOptions = {
           if (!existingUser) {
             // Criar novo usuário
             existingUser = await User.create({
-              discordId,
+              discordId: discordId || undefined,
               name: user.name || discordProfile.username,
-              email: user.email,
-              image: user.image,
+              email: user.email || "",
+              image: user.image || undefined,
               username: discordProfile.username,
               discriminator: discordProfile.discriminator,
               registroCompleto: false,
