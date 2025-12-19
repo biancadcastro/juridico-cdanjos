@@ -5,6 +5,7 @@ import { Scale, Shield, Gavel, UserCircle, ArrowRight, CheckCircle, BookOpen, Fi
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { signIn } from "next-auth/react";
 
 
 export default function Home() {
@@ -65,13 +66,13 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-              <Link
-                href="/login"
-                className="group flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl transition-all shadow-lg hover:shadow-xl font-semibold text-lg"
+              <button
+                onClick={() => signIn("discord", { callbackUrl: "/dashboard" })}
+                className="group flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl transition-all shadow-lg hover:shadow-xl font-semibold text-lg cursor-pointer"
               >
                 Acessar Sistema
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </button>
               <Link
                 href="/quem-somos"
                 className="px-8 py-4 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl transition-all shadow-md hover:shadow-lg font-semibold text-lg border border-gray-200 dark:border-gray-700"
@@ -392,7 +393,7 @@ export default function Home() {
           {/* View All Team Button */}
           <div className="text-center mt-16">
             <Link
-              href="/funcionarios"
+              href="/equipe"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl transition-all font-semibold shadow-lg hover:shadow-xl text-lg"
             >
               <Users className="w-5 h-5" />

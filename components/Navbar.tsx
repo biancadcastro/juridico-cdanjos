@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogIn, Scale, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -11,9 +12,8 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Serviços", href: "/servicos" },
-    { name: "Funcionários", href: "/funcionarios" },
+    { name: "Funcionários", href: "/equipe" },
     { name: "Quem Somos", href: "/quem-somos" },
-    { name: "Gerar OACA", href: "/gerar-oab" },
   ];
 
   return (
@@ -52,13 +52,13 @@ export default function Navbar() {
 
           {/* Right Side - Login Button & Mobile Menu */}
           <div className="flex items-center gap-4">
-            <Link
-              href="/login"
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg transition-all shadow-md hover:shadow-lg font-medium text-sm"
+            <button
+              onClick={() => signIn("discord", { callbackUrl: "/dashboard" })}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg transition-all shadow-md hover:shadow-lg font-medium text-sm cursor-pointer"
             >
               <LogIn className="w-4 h-4" />
               <span className="hidden sm:inline">Login</span>
-            </Link>
+            </button>
 
             {/* Mobile Menu Button */}
             <button
