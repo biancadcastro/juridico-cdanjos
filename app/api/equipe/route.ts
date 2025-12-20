@@ -12,7 +12,7 @@ export async function GET() {
       statusAprovacao: "aprovado",
       ativo: { $ne: false }
     })
-    .select("name email cargo passaporte contratadoPor createdAt statusAprovacao fotoOAB numeroOAB cpf")
+    .select("name email cargo passaporte contratadoPor createdAt statusAprovacao fotoOAB numeroOAB")
     .lean()
     .exec();
 
@@ -38,7 +38,6 @@ export async function GET() {
       statusAprovacao: usuario.statusAprovacao,
       fotoOAB: usuario.fotoOAB,
       numeroOAB: usuario.numeroOAB,
-      cpf: usuario.cpf,
       hierarquia: hierarquiaPorCargo.get(usuario.cargo) || 99
     })).sort((a, b) => a.hierarquia - b.hierarquia);
 
