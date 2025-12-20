@@ -7,7 +7,7 @@ import { uploadToR2, deleteFromR2 } from "@/lib/r2";
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);

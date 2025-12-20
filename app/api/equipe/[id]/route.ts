@@ -30,7 +30,7 @@ async function verificarPermissao(session: any, moduloNome: string, acaoNome: st
 // PATCH - Atualizar cargo do funcionário
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -47,7 +47,7 @@ export async function PATCH(
 
     await dbConnect();
 
-    const { id } = params;
+    const { id } = await params;
     const { cargo } = await request.json();
 
     if (!cargo) {
@@ -78,7 +78,7 @@ export async function PATCH(
 // DELETE - Demitir funcionário (desativar)
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -95,7 +95,7 @@ export async function DELETE(
 
     await dbConnect();
 
-    const { id } = params;
+    const { id } = await params;
 
     // Atualizar o status de aprovação para "rejeitado" ou adicionar um campo "ativo: false"
     const usuario = await User.findByIdAndUpdate(
