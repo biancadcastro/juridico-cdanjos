@@ -45,93 +45,91 @@ export default function CertidaoTemplate({
           minHeight: '1123px',
           backgroundColor: '#ffffff',
           padding: '76px',
+          margin: '0',
           position: 'relative',
           fontFamily: "'Poppins', sans-serif",
           boxSizing: 'border-box',
-          overflow: 'hidden'
+          overflow: 'visible'
         }}
       >
-      {/* Cabeçalho Oficial */}
       <div 
         style={{
-          borderBottom: '3px double #1e3a8a',
-          paddingBottom: '20px',
-          marginBottom: '30px',
+          borderBottom: '2px double #1e3a8a',
+          paddingBottom: '8px',
+          marginBottom: '15px',
           textAlign: 'center'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div style={{
-            width: '80px',
-            height: '80px',
+            width: '50px',
+            height: '50px',
             backgroundColor: '#1e3a8a',
             borderRadius: '50%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <Scale style={{ width: '48px', height: '48px', color: 'white' }} />
+            <Scale style={{ width: '30px', height: '30px', color: 'white' }} />
           </div>
         </div>
         <h1 style={{ 
-          fontSize: '32px', 
+          fontSize: '24px', 
           fontWeight: '900', 
           color: '#1e3a8a', 
-          margin: '0 0 12px 0',
+          margin: '0 0 6px 0',
           textTransform: 'uppercase',
           letterSpacing: '4px',
           fontFamily: "'Roboto', sans-serif"
         }}>
           {cartorio}
         </h1>
-        <p style={{ fontSize: '18px', color: '#4b5563', margin: '0 0 8px 0', fontWeight: '600', fontFamily: "'Poppins', sans-serif" }}>
+        <p style={{ fontSize: '16px', color: '#4b5563', margin: '0 0 6px 0', fontWeight: '600', fontFamily: "'Poppins', sans-serif" }}>
           {cidadeUF}
         </p>
-        <p style={{ fontSize: '14px', color: '#6b7280', margin: 0, fontStyle: 'italic', letterSpacing: '1px', fontFamily: "'Poppins', sans-serif" }}>
+        <p style={{ fontSize: '12px', color: '#6b7280', margin: 0, fontStyle: 'italic', letterSpacing: '1px', fontFamily: "'Poppins', sans-serif" }}>
           "Cidade dos Anjos - Onde a justiça e o amor caminham juntos"
         </p>
       </div>
 
-      {/* Tipo de Documento */}
       <div style={{
         backgroundColor: '#eff6ff',
-        padding: '20px',
-        borderRadius: '8px',
-        marginBottom: '30px',
-        borderLeft: '4px solid #1e3a8a'
+        padding: '12px',
+        borderRadius: '6px',
+        marginBottom: '15px',
+        borderLeft: '3px solid #1e3a8a'
       }}>
         <h2 style={{ 
-          fontSize: '26px', 
+          fontSize: '20px', 
           fontWeight: '900', 
           color: '#1e3a8a', 
-          margin: '0 0 10px 0',
+          margin: '0 0 6px 0',
           textTransform: 'uppercase',
           letterSpacing: '3px',
           fontFamily: "'Roboto', sans-serif"
         }}>
           {titulo}
         </h2>
-        <div style={{ display: 'flex', gap: '20px', fontSize: '13px', color: '#4b5563' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <FileText style={{ width: '16px', height: '16px' }} />
+        <div style={{ display: 'flex', gap: '15px', fontSize: '12px', color: '#4b5563' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <FileText style={{ width: '14px', height: '14px' }} />
             <span><strong>Processo:</strong> {numeroProcesso}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Calendar style={{ width: '16px', height: '16px' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <Calendar style={{ width: '14px', height: '14px' }} />
             <span><strong>Emissão:</strong> {new Date(dataAbertura).toLocaleDateString('pt-BR')}</span>
           </div>
         </div>
       </div>
 
-      {/* Conteúdo Principal */}
-      <div style={{ marginBottom: '30px', lineHeight: '1.8' }}>
+      <div style={{ marginBottom: '15px', lineHeight: '1.5' }}>
         <p style={{ 
-          fontSize: '18px', 
+          fontSize: '14px', 
           color: '#1f2937', 
           textAlign: 'justify',
-          marginBottom: '24px',
-          textIndent: '50px',
-          lineHeight: '2.0',
+          marginBottom: '12px',
+          textIndent: '30px',
+          lineHeight: '1.6',
           fontWeight: '400',
           fontFamily: "'Poppins', sans-serif"
         }}>
@@ -140,12 +138,11 @@ export default function CertidaoTemplate({
           sob o Termo {termo}, consta registrado o seguinte:
         </p>
 
-        {/* Informações do Registro */}
         <div style={{
           backgroundColor: '#f9fafb',
-          padding: '20px',
-          borderRadius: '8px',
-          marginBottom: '20px',
+          padding: '12px',
+          borderRadius: '6px',
+          marginBottom: '12px',
           border: '1px solid #e5e7eb'
         }}>
           <div style={{ marginBottom: '15px' }}>
@@ -194,16 +191,15 @@ export default function CertidaoTemplate({
           </div>
         </div>
 
-        {/* Dados do Livro */}
         <div style={{
           backgroundColor: '#fef3c7',
-          padding: '15px',
-          borderRadius: '8px',
-          marginBottom: '20px',
+          padding: '10px',
+          borderRadius: '6px',
+          marginBottom: '12px',
           border: '1px solid #fbbf24'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-            <Book style={{ width: '20px', height: '20px', color: '#92400e' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <Book style={{ width: '18px', height: '18px', color: '#92400e' }} />
             <p style={{ fontSize: '14px', color: '#92400e', margin: 0, fontWeight: 'bold' }}>
               DADOS DO REGISTRO
             </p>
@@ -222,12 +218,12 @@ export default function CertidaoTemplate({
         </div>
 
         <p style={{ 
-          fontSize: '18px', 
+          fontSize: '14px', 
           color: '#1f2937', 
           textAlign: 'justify',
-          marginTop: '24px',
-          textIndent: '50px',
-          lineHeight: '2.0',
+          marginTop: '12px',
+          textIndent: '30px',
+          lineHeight: '1.6',
           fontWeight: '400',
           fontFamily: "'Poppins', sans-serif"
         }}>
@@ -237,17 +233,16 @@ export default function CertidaoTemplate({
         </p>
       </div>
 
-      {/* Rodapé com Assinatura */}
-      <div style={{ marginTop: '60px' }}>
+      <div style={{ marginTop: '30px' }}>
         <div style={{
           borderTop: '2px solid #e5e7eb',
-          paddingTop: '30px'
+          paddingTop: '15px'
         }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
-            gap: '30px',
-            marginBottom: '30px'
+            gap: '15px',
+            marginBottom: '15px'
           }}>
             <div style={{ textAlign: 'center' }}>
               <p style={{ 
@@ -256,7 +251,7 @@ export default function CertidaoTemplate({
                 margin: '0', 
                 fontWeight: '400', 
                 fontFamily: "'Sacramento', cursive",
-                height: '50px',
+                height: '64px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -267,7 +262,7 @@ export default function CertidaoTemplate({
               </p>
               <div style={{
                 borderBottom: '1px solid #1f2937',
-                marginTop: '-15px',
+                marginTop: '0px',
                 marginBottom: '6px'
               }}></div>
               <p style={{ 
@@ -299,7 +294,7 @@ export default function CertidaoTemplate({
                 margin: '0', 
                 fontWeight: '400', 
                 fontFamily: "'Sacramento', cursive",
-                height: '50px',
+                height: '64px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -310,7 +305,7 @@ export default function CertidaoTemplate({
               </p>
               <div style={{
                 borderBottom: '1px solid #1f2937',
-                marginTop: '-15px',
+                marginTop: '0px',
                 marginBottom: '6px'
               }}></div>
               <p style={{ 
@@ -342,7 +337,7 @@ export default function CertidaoTemplate({
                 margin: '0', 
                 fontWeight: '400', 
                 fontFamily: "'Sacramento', cursive",
-                height: '50px',
+                height: '64px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -353,7 +348,7 @@ export default function CertidaoTemplate({
               </p>
               <div style={{
                 borderBottom: '1px solid #1f2937',
-                marginTop: '-15px',
+                marginTop: '0px',
                 marginBottom: '6px'
               }}></div>
               <p style={{ 
@@ -380,10 +375,9 @@ export default function CertidaoTemplate({
           </div>
         </div>
 
-        {/* Informações de Autenticidade */}
         <div style={{
-          marginTop: '40px',
-          padding: '15px',
+          marginTop: '15px',
+          padding: '10px',
           backgroundColor: '#f9fafb',
           borderRadius: '8px',
           border: '1px solid #e5e7eb'
@@ -415,7 +409,7 @@ export default function CertidaoTemplate({
       }}>
         CIDADE DOS ANJOS
       </div>
-    </div>
+      </div>
     </>
   );
 }

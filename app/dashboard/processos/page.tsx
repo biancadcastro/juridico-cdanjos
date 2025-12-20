@@ -798,7 +798,11 @@ export default function ProcessosPage() {
                           scale: 2,
                           useCORS: true,
                           logging: false,
-                          backgroundColor: '#ffffff'
+                          backgroundColor: '#ffffff',
+                          width: 794,
+                          height: certidaoRef.current.scrollHeight,
+                          x: 0,
+                          y: 0
                         });
                         
                         // Converter para PNG e baixar
