@@ -15,7 +15,9 @@ import {
   ChevronLeft,
   ChevronRight,
   UserCheck,
-  Users
+  Users,
+  FileText,
+  DollarSign
 } from "lucide-react";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -74,6 +76,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const navLinks = [
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Funcionários", href: "/dashboard/funcionarios", icon: Users },
+    { name: "Processos", href: "/dashboard/processos", icon: FileText },
+    { name: "Serviços", href: "/dashboard/servicos", icon: DollarSign },
     { name: "Contratações", href: "/dashboard/contratacoes", icon: UserCheck },
     { name: "Cargos", href: "/dashboard/cargos", icon: Shield },
   ];

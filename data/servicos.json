@@ -1,0 +1,9 @@
+[
+    {
+        "id": "certidao-casamento",
+        "nome": "Certidao de Casamento",
+        "descricao": "Registro de uniao matrimonial entre duas pessoas",
+        "valorPadrao": 150.00,
+        "categoria": "Cartorio"
+    }
+]

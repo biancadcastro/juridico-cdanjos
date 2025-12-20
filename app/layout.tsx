@@ -1,11 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display, Crimson_Text } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
 const inter = Inter({ 
   subsets: ["latin"],
   display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-playfair"
+});
+
+const crimson = Crimson_Text({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  variable: "--font-crimson"
 });
 
 export const metadata: Metadata = {
@@ -69,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${playfair.variable} ${crimson.variable}`}>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

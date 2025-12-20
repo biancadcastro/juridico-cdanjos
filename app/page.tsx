@@ -521,7 +521,7 @@ export default function Home() {
       {/* Consulta de Processos Section */}
       <section className="py-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 relative overflow-hidden">
         {/* Decorative Elements */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         
