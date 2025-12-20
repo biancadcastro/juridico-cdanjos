@@ -51,8 +51,7 @@ const ProcessoSchema = new Schema({
   dataAtualizacao: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-// Índices para melhorar performance
-ProcessoSchema.index({ numeroProcesso: 1 });
+// Índices para melhorar performance (numeroProcesso já tem índice via unique: true)
 ProcessoSchema.index({ status: 1 });
 ProcessoSchema.index({ tipo: 1 });
 ProcessoSchema.index({ responsavel: 1 });
