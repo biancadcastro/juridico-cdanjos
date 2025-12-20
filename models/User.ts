@@ -15,7 +15,14 @@ const UserSchema = new Schema({
   statusAprovacao: { type: String, enum: ['pendente', 'aprovado', 'rejeitado'], default: 'pendente' },
   dataAprovacao: { type: Date },
   aprovadoPor: { type: String },
+  ativo: { type: Boolean, default: true },
+  fotoOAB: { type: String },
+  numeroOAB: { type: String },
 }, { timestamps: true, strict: false });
+
+// Índices para melhorar performance
+UserSchema.index({ statusAprovacao: 1, ativo: 1 });
+UserSchema.index({ cargo: 1 });
 
 // Limpar cache do modelo se existir
 if (models.User) {

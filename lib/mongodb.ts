@@ -18,6 +18,10 @@ export async function dbConnect() {
     cached.promise = mongoose.connect(MONGODB_URI, {
       dbName: "cidade-dos-anjos",
       bufferCommands: false,
+      maxPoolSize: 10,
+      minPoolSize: 2,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
     }).then((mongoose) => mongoose);
   }
   cached.conn = await cached.promise;

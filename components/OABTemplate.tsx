@@ -34,7 +34,8 @@ export default function OABTemplate({
         position: 'relative',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         boxSizing: 'border-box',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        borderRadius: '24px'
       }}
     >
       {/* Cabeçalho com logo e título */}
@@ -86,15 +87,19 @@ export default function OABTemplate({
       {/* Corpo do documento */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', height: '300px' }}>
         <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start', height: '220px' }}>
-          {fotoAdvogado && (
-            <div style={{
-              width: '165px',
-              height: '220px',
-              overflow: 'hidden',
-              borderRadius: '8px',
-              border: '3px solid #1e3a8a',
-              flexShrink: 0
-            }}>
+          <div style={{
+            width: '165px',
+            height: '220px',
+            overflow: 'hidden',
+            borderRadius: '8px',
+            border: '3px solid #1e3a8a',
+            flexShrink: 0,
+            backgroundColor: fotoAdvogado ? 'transparent' : '#f3f4f6',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {fotoAdvogado ? (
               <img 
                 src={fotoAdvogado} 
                 alt="Foto do Advogado" 
@@ -104,8 +109,30 @@ export default function OABTemplate({
                   objectFit: 'cover'
                 }}
               />
-            </div>
-          )}
+            ) : (
+              <div style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px'
+              }}>
+                <User style={{ width: '56px', height: '56px', color: '#9ca3af' }} />
+                <p style={{
+                  fontSize: '12px',
+                  color: '#6b7280',
+                  textAlign: 'center',
+                  margin: 0,
+                  padding: '0 16px',
+                  lineHeight: 1.4
+                }}>
+                  Foto 3:4<br />não disponível
+                </p>
+              </div>
+            )}
+          </div>
           
           <div 
             style={{

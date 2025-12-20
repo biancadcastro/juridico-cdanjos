@@ -24,22 +24,8 @@ export const authOptions: NextAuthOptions = {
           const discordProfile = profile as any;
           const discordId = user.id;
           
-          console.log("=== DEBUG LOGIN ===");
-          console.log("Discord ID recebido:", discordId);
-          console.log("User.id tipo:", typeof discordId);
-          
           // Verificar se o usuário já existe
           let existingUser = await User.findOne({ discordId });
-          
-          console.log("Usuário encontrado:", existingUser ? "SIM" : "NÃO");
-          if (existingUser) {
-            console.log("Dados do usuário:", {
-              id: existingUser._id,
-              discordId: existingUser.discordId,
-              registroCompleto: existingUser.registroCompleto,
-              statusAprovacao: existingUser.statusAprovacao
-            });
-          }
           
           if (!existingUser) {
             // Criar novo usuário

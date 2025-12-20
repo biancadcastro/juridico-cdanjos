@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Users } from "lucide-react";
+import { Users, Eye, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import OABTemplate from "@/components/OABTemplate";
 
 interface Membro {
   _id: string;
   name: string;
   cargo: string;
   image: string;
+  fotoOAB?: string;
+  numeroOAB?: string;
+  cpf?: string;
   createdAt: string;
   hierarquia: number;
 }
@@ -16,6 +20,7 @@ interface Membro {
 export default function HierarquiaPage() {
   const [membros, setMembros] = useState<Membro[]>([]);
   const [loading, setLoading] = useState(true);
+  const [modalOAB, setModalOAB] = useState<Membro | null>(null);
 
   useEffect(() => {
     carregarMembros();
@@ -109,9 +114,9 @@ export default function HierarquiaPage() {
                     >
                       {/* Foto 3:4 */}
                       <div className="relative aspect-[3/4] bg-gradient-to-br from-blue-900/50 to-purple-900/50 overflow-hidden">
-                        {membro.image ? (
+                        {(membro.fotoOAB || membro.image) ? (
                           <img 
-                            src={membro.image} 
+                            src={membro.fotoOAB || membro.image} 
                             alt={membro.name}
                             className="w-full h-full object-cover"
                           />
@@ -127,12 +132,23 @@ export default function HierarquiaPage() {
                       </div>
 
                       {/* Info */}
-                      <div className="p-4">
-                        <h3 className="text-lg font-bold text-white mb-1 truncate">
-                          {membro.name}
-                        </h3>
-                        <div className="flex items-center gap-2 text-sm text-gray-400">
-                          <span>Desde {formatarData(membro.createdAt)}</span>
+                      <div className="p-5 space-y-3">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-bold text-white truncate">
+                              {membro.name}
+                            </h3>
+                            <p className="text-sm text-gray-400 mt-1 whitespace-nowrap">
+                              {formatarData(membro.createdAt)}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => setModalOAB(membro)}
+                            className="p-2 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 border border-blue-400/50 rounded-lg transition-all duration-200 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/50 flex-shrink-0"
+                            title="Visualizar OAB"
+                          >
+                            <Eye className="w-4 h-4 text-white" />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -143,6 +159,47 @@ export default function HierarquiaPage() {
           </div>
         )}
       </main>
+
+      {/* Modal Visualizar OAB */}
+      {modalOAB && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full p-8 border-2 border-gray-700 my-8">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-white">
+                Carteira OAB - {modalOAB.name}
+              </h3>
+              <button
+                onClick={() => setModalOAB(null)}
+                className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-700 rounded-lg"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="bg-gray-800 rounded-xl p-4 overflow-x-auto">
+              <div className="flex justify-center" id={`oab-preview-${modalOAB._id}`}>
+                <OABTemplate
+                  numeroOAB={modalOAB.numeroOAB}
+                  nomeAdvogado={modalOAB.name}
+                  cpf={modalOAB.cpf}
+                  dataEmissao={new Date(modalOAB.createdAt).toLocaleDateString('pt-BR')}
+                  estadoOAB="CDA"
+                  categoria="Advogado(a)"
+                  situacao="REGULAR"
+                  fotoAdvogado={modalOAB.fotoOAB}
+                />
+              </div>
+            </div>
+
+            <button
+              onClick={() => setModalOAB(null)}
+              className="mt-6 w-full px-4 py-3 text-gray-300 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors font-medium"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="mt-20 bg-black/30 backdrop-blur-sm border-t border-white/10">
