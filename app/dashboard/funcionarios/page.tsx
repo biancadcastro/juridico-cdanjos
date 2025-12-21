@@ -574,8 +574,12 @@ export default function FuncionariosPage() {
 
                                 <button
                                   onClick={() => {
-                                    exportarCarteirinha(funcionario);
+                                    setModalCarteirinha(funcionario);
                                     setMenuAberto(null);
+                                    // Aguarda o modal renderizar e então exporta
+                                    setTimeout(() => {
+                                      exportarCarteirinha(funcionario);
+                                    }, 100);
                                   }}
                                   className="w-full px-4 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400 flex items-center gap-3 transition-all group"
                                 >
