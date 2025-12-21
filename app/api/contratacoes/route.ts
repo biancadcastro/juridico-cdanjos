@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { dbConnect } from "@/lib/mongodb";
 import { User } from "@/models/User";
+import { Cargo } from "@/models/Cargo";
 
 // GET - Listar usuários pendentes de aprovação
 export async function GET() {
@@ -50,6 +51,16 @@ export async function POST(req: NextRequest) {
     const usuario = await User.findById(userId);
     if (!usuario) {
       return NextResponse.json({ error: "Usuário não encontrado" }, { status: 404 });
+    }
+
+    // Se for aprovação, buscar o cargo mais baixo da hierarquia
+    if (acao === "aprovar") {
+      // Buscar o cargo com a maior hierarquia (hierarquia mais baixa)
+      const cargoMaisBaixo = await Cargo.findOne().sort({ hierarquia: -1 }).limit(1);
+      
+      if (cargoMaisBaixo) {
+        usuario.cargo = cargoMaisBaixo.nome;
+      }
     }
 
     // Atualizar status

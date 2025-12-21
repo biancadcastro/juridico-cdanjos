@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Users, Trash2, Calendar, IdCard, UserCog, AlertCircle, Lock, MoreVertical, Upload, Eye, Download, X } from "lucide-react";
+import { Users, Trash2, Calendar, IdCard, UserCog, AlertCircle, Lock, MoreVertical, Upload, Eye, Download, X, RefreshCw } from "lucide-react";
 import { useSession } from "next-auth/react";
 import OABTemplate from "@/components/OABTemplate";
 import html2canvas from "html2canvas";
@@ -338,9 +338,18 @@ export default function FuncionariosPage() {
       <div className="max-w-7xl mx-auto">
         {/* Cabeçalho */}
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-8 h-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Funcionários</h1>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <Users className="w-8 h-8 text-blue-600" />
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Funcionários</h1>
+            </div>
+            <button
+              onClick={carregarDados}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Recarregar
+            </button>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
             Gerencie os funcionários da equipe, altere cargos e realize demissões
@@ -348,7 +357,7 @@ export default function FuncionariosPage() {
         </div>
 
         {/* Estatísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
@@ -370,6 +379,18 @@ export default function FuncionariosPage() {
                 </p>
               </div>
               <UserCog className="w-12 h-12 text-green-600 opacity-20" />
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500 dark:text-gray-400 text-sm">Sem Cargo</p>
+                <p className="text-3xl font-bold text-orange-600 dark:text-orange-400 mt-1">
+                  {funcionarios.filter(f => !f.cargo).length}
+                </p>
+              </div>
+              <AlertCircle className="w-12 h-12 text-orange-600 opacity-20" />
             </div>
           </div>
 
@@ -420,7 +441,14 @@ export default function FuncionariosPage() {
                 </thead>
                 <tbody className="divide-y-2 divide-gray-100 dark:divide-gray-700">
                   {funcionarios.map((funcionario) => (
-                    <tr key={funcionario._id} className="hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 dark:hover:from-blue-900/10 dark:hover:to-purple-900/10 transition-all duration-200">
+                    <tr 
+                      key={funcionario._id} 
+                      className={`transition-all duration-200 ${
+                        !funcionario.cargo 
+                          ? 'bg-orange-50/50 dark:bg-orange-900/10 border-l-4 border-orange-500 hover:bg-orange-100/50 dark:hover:bg-orange-900/20' 
+                          : 'hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 dark:hover:from-blue-900/10 dark:hover:to-purple-900/10'
+                      }`}
+                    >
                       <td className="px-6 py-5 whitespace-nowrap">
                         <div className="flex items-center gap-3">
                           {funcionario.fotoOAB ? (
@@ -456,14 +484,20 @@ export default function FuncionariosPage() {
                             value={funcionario.cargo || ""}
                             onChange={(e) => atualizarCargo(funcionario._id, e.target.value)}
                             disabled={atualizando === funcionario._id || !permissoes.editarCargo}
-                            className="block w-full px-4 py-2.5 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-900 dark:text-white hover:border-blue-500 dark:hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-200 dark:disabled:hover:border-gray-600 transition-all cursor-pointer appearance-none bg-no-repeat bg-right pr-10"
+                            className={`block w-full px-4 py-2.5 bg-white dark:bg-gray-700 border-2 rounded-lg shadow-sm text-sm font-medium hover:border-blue-500 dark:hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-200 dark:disabled:hover:border-gray-600 transition-all cursor-pointer appearance-none bg-no-repeat bg-right pr-10 ${
+                              !funcionario.cargo 
+                                ? 'border-orange-500 dark:border-orange-500 text-orange-700 dark:text-orange-400' 
+                                : 'border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white'
+                            }`}
                             style={{
                               backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                               backgroundPosition: 'right 0.5rem center',
                               backgroundSize: '1.5em 1.5em'
                             }}
                           >
-                            <option value="" disabled>Selecione um cargo</option>
+                            <option value="" disabled>
+                              {!funcionario.cargo ? '⚠️ Selecione um cargo' : 'Selecione um cargo'}
+                            </option>
                             {cargos.map((cargo) => (
                               <option key={cargo._id} value={cargo.nome}>
                                 {cargo.nome}
